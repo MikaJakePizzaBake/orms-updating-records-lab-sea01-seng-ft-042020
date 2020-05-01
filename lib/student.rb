@@ -34,8 +34,13 @@ def self.new_from_db(row)
   student.id = [0]
   student.name = [1]
   student.grade = [2]
+  student
 end
 def self.all
+  sql = <<-SQL
+  SELECT*FROM students
+  SQL
+  DB[:conn].execute(sql).map {|row| self.new_from_db(row)}
 end
 def update
   sql = "UPDATE students SET name = ?, grade = ? WHERE id = ?"
