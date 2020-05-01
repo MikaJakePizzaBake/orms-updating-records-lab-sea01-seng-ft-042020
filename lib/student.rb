@@ -29,6 +29,14 @@ class Student
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
   end
 end
+def self.new_from_db(row)
+  student= self.new
+  student.id = [0]
+  student.name = [1]
+  student.grade = [2]
+end
+def self.all
+end
 def update
   sql = "UPDATE students SET name = ?, grade = ? WHERE id = ?"
   DB[:conn].execute(sql, self.name, self.album, self.id)
